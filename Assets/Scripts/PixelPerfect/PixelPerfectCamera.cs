@@ -27,7 +27,7 @@ namespace Ssiat.PixelPerfect
 
 			public static bool operator !=(ScreenResolution left, ScreenResolution right)
 			{
-				return (left.width != right.width) && (left.height != right.height);
+				return (left.width != right.width) || (left.height != right.height);
 			}
 		}
 
