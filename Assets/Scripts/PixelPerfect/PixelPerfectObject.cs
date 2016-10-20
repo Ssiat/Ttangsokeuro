@@ -10,6 +10,13 @@ namespace Ssiat.PixelPerfect
 		public int scale = 1;
 		public bool positionForScale = true;
 
+		private SpriteRenderer _spriteRenderer;
+
+		void OnEnable()
+		{
+			_spriteRenderer = GetComponent<SpriteRenderer>();
+		}
+
 		protected void LateUpdate()
 		{
 			if (transform.hasChanged)
@@ -34,7 +41,7 @@ namespace Ssiat.PixelPerfect
 
 		protected void SetPixelPerfectScale()
 		{
-			float pixelsPerUnit = GetComponent<SpriteRenderer>().sprite.pixelsPerUnit;
+			float pixelsPerUnit = _spriteRenderer.sprite.pixelsPerUnit;
 			transform.localScale = new Vector2(scale * pixelsPerUnit, scale * pixelsPerUnit);
 		}
 	}

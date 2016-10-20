@@ -34,6 +34,7 @@ namespace Ssiat.PixelPerfect
 		private ScreenResolution _lateScreenResolution	= new ScreenResolution(0, 0);
 		private bool _xIsEven							= true;
 		private bool _yIsEven							= true;
+		private Camera _camera;
 		private Vector2 _truePosition;
 
 		/*
@@ -48,6 +49,8 @@ namespace Ssiat.PixelPerfect
 		void OnEnable()
 		{
 			// Debug.Log("OnEnable()");
+
+			_camera = GetComponent<Camera>();
 
 			_truePosition = new Vector2(transform.position.x, transform.position.y);
 			SetPixelPerfect();
@@ -102,7 +105,7 @@ namespace Ssiat.PixelPerfect
 		{
 			// Debug.Log("SetPixelPerfectSize()");
 
-			GetComponent<Camera>().orthographicSize = Screen.height / 2.0f;
+			_camera.orthographicSize = Screen.height / 2.0f;
 
 			_xIsEven = (Screen.width % 2) == 0;
 			_yIsEven = (Screen.height % 2) == 0;
