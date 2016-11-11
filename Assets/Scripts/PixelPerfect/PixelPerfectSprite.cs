@@ -13,10 +13,16 @@ namespace Ssiat.PixelPerfect
 
 		void OnEnable()
 		{
-			_sprite = new GameObject("Sprite");
-			_sprite.transform.parent = transform;
-			_sprite.AddComponent<SpriteRenderer>().sprite = GetComponent<SpriteRenderer>().sprite;
-			GetComponent<SpriteRenderer>().sprite = null;
+			if (_sprite == null)
+			{
+				_sprite = new GameObject("Sprite");
+				_sprite.transform.parent = transform;
+				if ( GetComponent<SpriteRenderer>().sprite != null )
+					{
+						_sprite.AddComponent<SpriteRenderer>().sprite = GetComponent<SpriteRenderer>().sprite;
+						GetComponent<SpriteRenderer>().sprite = null;
+					}
+			}
 		}
 
 		protected void LateUpdate()
@@ -43,7 +49,7 @@ namespace Ssiat.PixelPerfect
 
 		protected void SetPixelPerfectScale()
 		{
-			float pixelsPerUnit = GetComponent<SpriteRenderer>().sprite.pixelsPerUnit;
+			float pixelsPerUnit = _sprite.GetComponent<SpriteRenderer>().sprite.pixelsPerUnit;
 			transform.localScale = new Vector2(scale * pixelsPerUnit, scale * pixelsPerUnit);
 		}
 	}
